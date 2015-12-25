@@ -12,6 +12,8 @@
 #define _LW 1
 #define _RS 2
 #define _SC 3
+#define _SCCAM 4
+#define _SCSETCAM 5
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QW] = { /* Qwerty */
@@ -24,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC},
   {KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS},
   {KC_TRNS, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
-  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {KC_TRNS, KC_TRNS, KC_TRNS, DF(_SC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
 },
 [_LW] = { /* LOWER */
   {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC},
@@ -33,10 +35,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
 },
 [_SC] = { /* STARCRAFT */
-  {KC_GRV,  KC_TRNS, KC_TRNS, KC_F9,   KC_F5,   KC_ESC,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV},
-  {KC_TRNS, KC_F1,   KC_F2,   KC_F10,  KC_F6,   KC_Q,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_R},
-  {KC_TRNS, KC_F7,   KC_F8,   KC_F11,  KC_F7,   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_LALT},
-  {KC_TRNS, KC_TRNS, KC_TRNS, KC_F12,  KC_F8,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_LCTL, KC_LSFT}
+  {DF(_QW), KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_ESC, KC_1,          KC_2,    KC_3,    KC_4,       KC_5,    KC_F2},
+  {KC_PAUS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TAB,  KC_W,   KC_Q,          KC_S,    KC_H,    KC_F,       KC_G,    KC_F1},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_C,    KC_R,   KC_A,          KC_9,    KC_8,    KC_7,       KC_6,    KC_LALT},
+  {M(0),    M(1),    KC_TRNS, KC_TRNS, KC_TRNS, KC_P,   MO(_SCSETCAM), KC_Z,    KC_X,    MO(_SCCAM), KC_LCTL, KC_LSFT}
+},
+[_SCCAM] = { /* STARCRAFT RECALL CAM */
+  {M(1),    M(2),    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_F5,       KC_F6,       KC_F7,       KC_TRNS, KC_TRNS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_F8,       LSFT(KC_F5), LSFT(KC_F6), KC_TRNS, KC_TRNS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LSFT(KC_F7), LSFT(KC_F8), KC_TRNS,     KC_TRNS, KC_TRNS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS}
+},
+[_SCSETCAM] = { /* STARCRAFT SET CAM */
+  {M(1),    M(2),    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LCTL(KC_F5),       LCTL(KC_F6),       LCTL(KC_F7),       KC_TRNS, KC_TRNS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LCTL(KC_F8),       LCTL(LSFT(KC_F5)), LCTL(LSFT(KC_F6)), KC_TRNS, KC_TRNS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LCTL(LSFT(KC_F7)), LCTL(LSFT(KC_F8)), KC_TRNS,           KC_TRNS, KC_TRNS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS,           KC_TRNS,           KC_TRNS, KC_TRNS}
 }
 };
 
@@ -54,6 +68,16 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             backlight_step();
           } else {
             unregister_code(KC_RSFT);
+          }
+        break;
+        case 1:
+          if (record->event.pressed) {
+            return MACRO(I(1), T(ENT), T(G), T(L), T(SPC), T(H), T(F), T(ENT), END);
+          }
+        break;
+        case 2:
+          if (record->event.pressed) {
+            return MACRO(I(1), T(ENT), T(G), T(G), T(ENT), T(F10), T(N), END);
           }
         break;
       }
