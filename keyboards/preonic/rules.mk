@@ -41,7 +41,7 @@ F_USB = $(F_CPU)
 #     different sizes, comment this out, and the correct address will be loaded 
 #     automatically (+60). See bootloader.mk for all options.
 ifeq ($(strip $(KEYBOARD)), preonic/rev1)
-    BOOTLOADER = atmel-dfu
+    BOOTLOADER = qmk-dfu
 endif
 ifeq ($(strip $(KEYBOARD)), preonic/rev2)
     BOOTLOADER = qmk-dfu
